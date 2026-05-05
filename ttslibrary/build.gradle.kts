@@ -32,9 +32,25 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
-
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.guy-4444"
+                artifactId = "spiderchart"
+                version = "1.03"
+            }
+        }
+    }
+}
 
 
 dependencies {
